@@ -28,4 +28,6 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
  // Buscar profesores por el acrónimo de su departamento
  // Spring entra en la entidad Departamento y busca el campo 'acronimo'
  List<Profesor> findByDepartamentoAcronimo(String acronimo);
+ // Buscar profesores por el nombre de una de sus asignaturas
+ List<Profesor> findByAsignaturasNombre(String nombreAsignatura);
 }
