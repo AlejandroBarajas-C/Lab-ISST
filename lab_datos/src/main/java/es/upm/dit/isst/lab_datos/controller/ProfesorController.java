@@ -20,24 +20,24 @@ import es.upm.dit.isst.lab_datos.repository.ProfesorRepository;
 @RestController
 @RequestMapping("/api/profesores")
 public class ProfesorController {
- @Autowired
- private ProfesorRepository profesorRepository;
- // Obtener todos: http://localhost:8080/api/profesores
- @GetMapping
- public List<Profesor> getAll() {
- return profesorRepository.findAll();
- }
- // Buscar por NRP: http://localhost:8080/api/profesores/nrp/123456
- @GetMapping("/nrp/{nrp}")
- public ResponseEntity<Profesor> getByNrp(@PathVariable String nrp) {
- return profesorRepository.findByNrp(nrp)
- .map(ResponseEntity::ok)
- .orElse(ResponseEntity.notFound().build());
+    @Autowired
+    private ProfesorRepository profesorRepository;
+    // Obtener todos: http://localhost:8080/api/profesores
+    @GetMapping
+    public List<Profesor> getAll() {
+    return profesorRepository.findAll();
+    }
+    // Buscar por NRP: http://localhost:8080/api/profesores/nrp/123456
+    @GetMapping("/nrp/{nrp}")
+    public ResponseEntity<Profesor> getByNrp(@PathVariable String nrp) {
+    return profesorRepository.findByNrp(nrp)
+    .map(ResponseEntity::ok)
+    .orElse(ResponseEntity.notFound().build());
  }
  // Buscar por nombre: http://localhost:8080/api/profesores/buscar?nombre=Juan
  @GetMapping("/buscar")
  public List<Profesor> searchByNombre(@RequestParam String nombre) {
- return profesorRepository.findByNombreContaining(nombre);
+    return profesorRepository.findByNombreContaining(nombre);
  }
 
  @GetMapping("/mas-de-dos-asignaturas")
