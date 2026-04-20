@@ -1,6 +1,9 @@
 package es.upm.dit.isst.lab_datos.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,4 +38,17 @@ public class ProfesorController {
  public List<Profesor> searchByNombre(@RequestParam String nombre) {
  return profesorRepository.findByNombreContaining(nombre);
  }
+
+ @GetMapping("/mas-de-dos-asignaturas")
+public List<Map<String, Object>> getProfesoresConMasDeDosAsignaturas() {
+    List<Object[]> results = profesorRepository.findProfesoresConMasDeDosAsignaturas();
+    List<Map<String, Object>> response = new ArrayList<>();
+    for (Object[] row : results) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("nombre", row[0]);
+        map.put("numAsignaturas", row[1]);
+        response.add(map);
+    }
+    return response;
+}
 }
