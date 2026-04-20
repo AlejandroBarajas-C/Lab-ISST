@@ -2,6 +2,7 @@ package es.upm.dit.isst.lab_datos.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,17 @@ public List<Map<String, Object>> getProfesoresConMasDeDosAsignaturas() {
         map.put("nombre", row[0]);
         map.put("numAsignaturas", row[1]);
         response.add(map);
+    }
+    return response;
+}
+@GetMapping("/comparten-despacho")
+public Map<String, List<String>> getProfesoresQueCompartenDespacho() {
+    List<Object[]> results = profesorRepository.findProfesoresQueCompartenDespacho();
+    Map<String, List<String>> response = new LinkedHashMap<>();
+    for (Object[] row : results) {
+        String despacho = (String) row[0];
+        String nombre = (String) row[1];
+        response.computeIfAbsent(despacho, k -> new ArrayList<>()).add(nombre);
     }
     return response;
 }

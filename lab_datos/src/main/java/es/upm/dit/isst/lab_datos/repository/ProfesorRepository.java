@@ -37,4 +37,11 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
        "GROUP BY p.id, p.nombre " +
        "HAVING COUNT(a) > 2")
 List<Object[]> findProfesoresConMasDeDosAsignaturas();
+
+@Query("SELECT p.despacho, p.nombre FROM Profesor p " +
+       "WHERE p.despacho IN (" +
+       "  SELECT p2.despacho FROM Profesor p2 " +
+       "  GROUP BY p2.despacho HAVING COUNT(p2) > 1" +
+       ") ORDER BY p.despacho")
+List<Object[]> findProfesoresQueCompartenDespacho();
 }
