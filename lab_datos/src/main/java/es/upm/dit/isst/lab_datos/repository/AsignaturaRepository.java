@@ -8,7 +8,7 @@ import es.upm.dit.isst.lab_datos.domain.Asignatura;
 
 public interface AsignaturaRepository extends JpaRepository<Asignatura, Long> {
  // Aquí irían los métodos de consulta personalizados para la entidad Asignatura
- Optional<Asignatura> findByCodigo(String acronimo);
+ Optional<Asignatura> findByAcronimo(String acronimo);
  // Buscar asignaturas por su nombre exacto     
  List<Asignatura> findByNombre(String nombre);
 // Buscar asignaturas por nombre que contenga un texto (LIKE %texto%)   
